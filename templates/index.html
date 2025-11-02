@@ -16,6 +16,86 @@
                 }
             }
         }
+		
+// ----- Code cho Phân Trang (Tải thêm) -----
+        
+        // Đặt sự kiện này để đảm bảo code chạy sau khi trang đã tải xong
+        document.addEventListener('DOMContentLoaded', (event) => {
+            
+            const videosPerPage = 10;
+            let currentPage = 1;
+
+            const videoListContainer = document.getElementById('video-list-container');
+            // Lấy tất cả các video đã được render bởi Jinja2
+            const allVideos = document.querySelectorAll('.video-item');
+            
+            if (allVideos.length === 0) return; // Không có video nào, không làm gì cả
+
+            const totalPages = Math.ceil(allVideos.length / videosPerPage);
+
+            const prevPageBtn = document.getElementById('prev-page-btn');
+            const nextPageBtn = document.getElementById('next-page-btn');
+            const pageDisplay = document.getElementById('page-number-display');
+
+            function showPage(page) {
+                currentPage = page;
+                const startIndex = (page - 1) * videosPerPage;
+                const endIndex = startIndex + videosPerPage;
+
+                // 1. Ẩn tất cả video
+                allVideos.forEach(video => {
+                    video.style.display = 'none';
+                });
+
+                // 2. Chỉ hiển thị video cho trang hiện tại
+                for (let i = startIndex; i < endIndex && i < allVideos.length; i++) {
+                    allVideos[i].style.display = 'block';
+                }
+
+                // 3. Cập nhật số trang
+                if (pageDisplay) {
+                    pageDisplay.textContent = `Trang ${currentPage} / ${totalPages}`;
+                }
+
+                // 4. Cập nhật trạng thái nút
+                if (prevPageBtn) {
+                    prevPageBtn.disabled = (currentPage === 1);
+                }
+                if (nextPageBtn) {
+                    nextPageBtn.disabled = (currentPage === totalPages);
+                }
+                
+                // Ẩn/Hiện toàn bộ thanh phân trang nếu chỉ có 1 trang
+                const paginationContainer = document.getElementById('pagination-container');
+                if (paginationContainer) {
+                    if (totalPages <= 1) {
+                        paginationContainer.style.display = 'none';
+                    } else {
+                        paginationContainer.style.display = 'flex';
+                    }
+                }
+            }
+
+            // Gắn sự kiện cho các nút
+            if (prevPageBtn) {
+                prevPageBtn.addEventListener('click', () => {
+                    if (currentPage > 1) {
+                        showPage(currentPage - 1);
+                    }
+                });
+            }
+            
+            if (nextPageBtn) {
+                nextPageBtn.addEventListener('click', () => {
+                    if (currentPage < totalPages) {
+                        showPage(currentPage + 1);
+                    }
+                });
+            }
+
+            // Hiển thị trang đầu tiên khi tải
+            showPage(1);
+        });
     </script>
     <style>
         .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 0.5rem; }
