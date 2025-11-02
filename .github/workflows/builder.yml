@@ -1,51 +1,47 @@
 name: Build and Deploy Static Site
 
-# Kích hoạt khi bạn đẩy code lên nhánh 'main'
 on:
   push:
     branches:
       - main
-  # Cho phép bạn chạy thủ công từ tab Actions
   workflow_dispatch:
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      # 1. Lấy code của bạn (từ nhánh main)
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2. Cài đặt Python 3.9
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
 
-      # 3. Cài đặt thư viện (pandas, jinja2)
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # 4. Chạy script build (build_static.py)
-      # Script này sẽ tạo ra thư mục 'build/'
       - name: Build static site
-        run: python build_static.py
+        run: python build_static.py # Bước này tạo ra thư mục 'build/index.html'
 
-      # 5. Đẩy (Deploy) kết quả sang nhánh 'deploy'
+      # --- BƯỚC MỚI ĐỂ SỬA LỖI ---
+      - name: Copy static assets (Icons)
+        run: |
+          # Copy thư mục 'static' (chứa icon) vào bên trong thư mục 'build'
+          cp -r static build/
+          
+      # --- BƯỚC DEPLOY ĐÃ SỬA ---
       - name: Deploy to deploy branch
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           
-          # Đẩy nội dung từ thư mục 'build' (chứa index.html)
+          # Bây giờ 'publish_dir' đã chứa cả index.html và thư mục static/
           publish_dir: ./build
           
-          # Đẩy sang một nhánh mới tên là 'deploy'
+          # Đẩy sang nhánh 'deploy'
           publish_branch: deploy
           
-          # RẤT QUAN TRỌNG: Copy cả thư mục 'static' (chứa icon)
-          # sang nhánh 'deploy'
-          copy_assets: |
-            static
+          # (Tôi đã XÓA dòng 'copy_assets:' bị lỗi)
