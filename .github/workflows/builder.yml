@@ -5,6 +5,8 @@ on:
     branches:
       - main
   workflow_dispatch:
+  repository_dispatch: # Cho phép kích hoạt bằng HTTP POST
+    types: [update-phapduyen-web] # Tên sự kiện tùy chỉnh
 
 jobs:
   build-and-deploy:
