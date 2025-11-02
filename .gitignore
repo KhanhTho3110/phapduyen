@@ -1,0 +1,8 @@
+# Bỏ qua thư mục build (vì nó được tạo tự động)
+build/
+
+# Bỏ qua các file tạm của Python
+__pycache__/
+*.pyc
+.env
+venv/
