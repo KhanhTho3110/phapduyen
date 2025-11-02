@@ -10,9 +10,8 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     
-    # --- THÊM 2 DÒNG NÀY ---
     permissions:
-      contents: write # Cấp quyền "Ghi" (write) cho robot
+      contents: write # Cấp quyền "Ghi"
       
     steps:
       - name: Checkout code
@@ -29,11 +28,10 @@ jobs:
           pip install -r requirements.txt
 
       - name: Build static site
-        run: python build_static.py # Tạo thư mục 'build/'
+        run: python build_static.py
 
       - name: Copy static assets (Icons)
         run: |
-          # Copy thư mục 'static' vào bên trong thư mục 'build'
           cp -r static build/
           
       - name: Deploy to deploy branch
@@ -42,3 +40,9 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
           publish_branch: deploy
+
+      # --- BƯỚC MỚI ĐÃ THÊM ---
+      - name: Trigger Cloudflare Deploy
+        run: |
+          # Dùng lệnh 'curl' để "nhấn nút" (gọi vào URL bí mật)
+          curl -X POST ${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}
