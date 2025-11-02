@@ -36,6 +36,11 @@
                     <img src="/static/facebook.png" alt="Facebook Icon" class="w-6 h-6">
                 </a>
                 
+                <a href="https://www.youtube.com/channel/UCcLHjyFoquOScNkUWVNF57A/" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity" title="YouTube">
+                    <span class="sr-only">YouTube</span>
+                    <img src="/static/youtube.png" alt="YouTube Icon" class="w-6 h-6">
+                </a>
+				
                 <a href="https://www.tiktok.com/@kenhcuaban" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity" title="TikTok">
                     <span class="sr-only">TikTok</span>
                     <img src="/static/tiktok.png" alt="TikTok Icon" class="w-6 h-6">
@@ -46,10 +51,7 @@
                     <img src="/static/twitter.png" alt="Twitter Icon" class="w-6 h-6">
                 </a>
                 
-                <a href="https://www.youtube.com/@vodanh-111-pm/shorts" target="_blank" rel="noopener noreferrer" class="hover:opacity-80 transition-opacity" title="YouTube">
-                    <span class="sr-only">YouTube</span>
-                    <img src="/static/youtube.png" alt="YouTube Icon" class="w-6 h-6">
-                </a>
+
                 
             </div>
         </header>
@@ -76,7 +78,7 @@
                     
                     <div class="p-3">
                         <h3 class="font-semibold text-sm truncate">{{ product.name }}</h3>
-                        <p class="text-xs text-gray-500">{{ product.description }}</p>
+						<p class="text-xs text-gray-500 line-clamp-2">{{ product.description }}</p>
                         <p class="text-base font-bold text-red-700 mt-1">{{ product.price }}</p>
                         <div class="w-full bg-phap-duyen-vang text-white py-1.5 rounded-md mt-2 text-sm font-semibold text-center group-hover:bg-yellow-600 transition-colors">
                             Chi Tiết
@@ -111,27 +113,24 @@
         
         <footer class="bg-phap-duyen-nau text-gray-200 p-6 text-center text-sm rounded-b-lg mt-6">
             <p class="font-bold text-white mb-2">Liên Hệ & Góp Duyên</p>
-            <p>Email: <a href="mailto:phapduyen.contact@example.com" class="text-phap-duyen-vang hover:underline">phapduyen.contact@example.com</a></p>
+            <p>Email: <a href="mailto:loiphatday1109@gmail.com" class="text-phap-duyen-vang hover:underline">loiphatday1109@gmail.com</a></p>
             <p class="mt-2 text-xs">Hãy theo dõi chúng tôi trên mạng xã hội để cập nhật những bài pháp thoại mới nhất!</p>
             <p class="mt-4 text-xs text-gray-400">&copy; 2025 Pháp Duyên. Bảo lưu mọi quyền.</p>
         </footer>
     </div>
 
-    <div id="donationModal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4 animate-fade-in">
+	<div id="donationModal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4 animate-fade-in">
         <div class="bg-white rounded-lg p-6 w-full max-w-sm mx-auto text-center relative shadow-xl">
             <button id="closeModalButton" class="absolute top-2 right-3 text-gray-400 hover:text-gray-700 text-3xl font-bold">&times;</button>
             <h3 class="text-xl font-bold text-phap-duyen-nau mb-3">Tuỳ hỷ ủng hộ</h3>
-            <p class="text-sm text-gray-600 mb-4">Sự ủng hộ của quý vị... (nội dung của bạn)</p>
-            <img src="https://placehold.co/250x250/eee/333?text=Mã+QR+Ủng+Hộ" alt="Mã QR Ngân Hàng" class="w-48 h-48 mx-auto rounded-md border">
-            <div class="bg-gray-50 p-3 rounded-md mt-4 text-left text-sm border">
-                <p class="font-semibold">Thông tin chuyển khoản:</p>
-                <p>Ngân hàng: <span class="font-bold text-red-600">Vietcombank</span></p>
-                <p>Số tài khoản: <span class="font-bold text-red-600">0123 456 789</span></p>
-                <p>Chủ tài khoản: <span class="font-bold text-red-600">NGUYEN VAN A</span></p>
-            </div>
+            <p class="text-sm text-gray-600 mb-4">Sự ủng hộ của quý vị là nguồn động viên lớn, giúp Pháp Duyên tiếp tục lan tỏa Phật pháp và thực hiện nhiều dự án ý nghĩa.</p> 
+            
+            <img src="https://drive.google.com/thumbnail?id=1I9c2hi3gEiEVTNE3IkZGDGSiC3AcCZ71&sz=w500" 
+                 alt="Mã QR Ngân Hàng" class="w-48 h-48 mx-auto rounded-md border">
+            
+            <p class="mt-4 text-xs text-gray-500">Xin chân thành cảm ơn sự tùy hỷ của quý vị!</p>
         </div>
     </div>
-
     <script>
         const btnProducts = document.getElementById('btn-products');
         const btnLectures = document.getElementById('btn-lectures');
