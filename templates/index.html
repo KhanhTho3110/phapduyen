@@ -89,28 +89,48 @@
             </div>
         </main>
 
-        <main id="lectures-section" class="p-4 space-y-6 hidden">
-            <h2 class="text-xl font-bold text-phap-duyen-nau border-b-2 border-phap-duyen-vang pb-2 mb-4">Pháp Thoại & Giảng Đạo</h2>
-            {% for video in videos|reverse %}
-            <div class="rounded-lg shadow-md border border-gray-100 bg-white">
-                <div class="video-container">
-                    <iframe 
-                        src="https://www.youtube.com/embed/{{ video.youtube_id }}" 
-                        title="YouTube video player" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                <div class="p-3">
-                    <button class="open-modal-btn w-full bg-red-600 text-white py-2 rounded-md mt-2 text-sm font-semibold hover:bg-red-700 transition-colors">
-                        Tuỳ hỷ ủng hộ
-                    </button>
-                </div>
-            </div>
-            {% endfor %}
-        </main>
         
+		<main id="lectures-section" class="p-4 space-y-6 hidden">
+            <h2 class="text-xl font-bold text-phap-duyen-nau border-b-2 border-phap-duyen-vang pb-2 mb-4">
+                Pháp Thoại & Giảng Đạo
+            </h2>
+
+            <div id="video-list-container" class="space-y-6">
+                
+                {% for video in videos|reverse %}
+                <div class="video-item rounded-lg shadow-md border border-gray-100 bg-white">
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/{{ video.youtube_id }}" 
+                            title="YouTube video player" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="p-3">
+                        <button class="open-modal-btn w-full bg-red-600 text-white py-2 rounded-md mt-2 text-sm font-semibold hover:bg-red-700 transition-colors">
+                            Tuỳ hỷ ủng hộ
+                        </button>
+                    </div>
+                </div>
+                {% endfor %}
+                </div>
+            <div id="pagination-container" class="flex justify-between items-center pt-4 border-t border-gray-200">
+                <button id="prev-page-btn" class="bg-phap-duyen-vang text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-yellow-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                    &larr; Trang Trước
+                </button>
+                
+                <span id="page-number-display" class="text-sm font-medium text-gray-700">
+                    Trang 1 / 1
+                </span>
+                
+                <button id="next-page-btn" class="bg-phap-duyen-vang text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-yellow-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                    Trang Sau &rarr;
+                </button>
+            </div>
+        </main>
+		
         <footer class="bg-phap-duyen-nau text-gray-200 p-6 text-center text-sm rounded-b-lg mt-6">
             <p class="font-bold text-white mb-2">Liên Hệ & Góp Duyên</p>
             <p>Email: <a href="mailto:loiphatday1109@gmail.com" class="text-phap-duyen-vang hover:underline">loiphatday1109@gmail.com</a></p>
