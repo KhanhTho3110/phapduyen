@@ -134,6 +134,26 @@
 
                 
             </div>
+			
+			<div class="flex justify-around mt-5 p-3 bg-phap-duyen-nau/80 rounded-lg shadow-inner">
+                
+                <div class="text-center">
+                    <p class="text-lg font-bold text-phap-duyen-vang">0</p>
+                    <p class="text-xs text-gray-300">Khách Duy Nhất</p>
+                </div>
+                
+                <div class="text-center">
+                    <p class="text-lg font-bold text-phap-duyen-vang">0</p>
+                    <p class="text-xs text-gray-300">SP Click</p>
+                </div>
+
+                <div class="text-center">
+                    <p class="text-lg font-bold text-phap-duyen-vang">0</p>
+                    <p class="text-xs text-gray-300">Tùy Hỷ Click</p>
+                </div>
+
+            </div>
+			
         </header>
 
 		<nav class="flex justify-around bg-white p-2 sticky top-0 z-10 shadow-md">
@@ -1249,6 +1269,60 @@
         openModalButtons.forEach(button => { button.addEventListener('click', () => { if (donationModal) { donationModal.style.display = 'flex'; } }); });
         if (closeModalButton) { closeModalButton.addEventListener('click', () => { if (donationModal) { donationModal.style.display = 'none'; } }); }
         if (donationModal) { donationModal.addEventListener('click', (event) => { if (event.target === donationModal) { donationModal.style.display = 'none'; } }); }
+		
+		
+// --- BỘ THEO DÕI ANALYTICS MỚI ---
+        const ANALYTICS_API_URL = "YOUR_ANALYTICS_LOGGING_API_URL_HERE"; // <-- Dán URL API GHI LOG ở Bước 1.2
+        const productsContainer = document.getElementById('products-section');
+        const lecturesContainer = document.getElementById('lectures-section');
+        const donateButtons = document.querySelectorAll('.open-modal-btn');
+        let userId = localStorage.getItem('phapduyen_uid');
+        if (!userId) {
+            userId = Math.random().toString(36).substring(2, 9); // Tạo ID duy nhất
+            localStorage.setItem('phapduyen_uid', userId);
+        }
+        
+        function sendAnalyticsEvent(eventType) {
+            if (!ANALYTICS_API_URL.startsWith('http')) return;
+            fetch(ANALYTICS_API_URL, {
+                method: 'POST',
+                mode: 'no-cors', // Cần thiết cho Google Apps Script
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ event: eventType, user_id: userId })
+            }).then(response => {
+                // Console.log("Gửi event thành công: " + eventType);
+            }).catch(error => console.error("Lỗi gửi analytics:", error));
+        }
+
+        // 1. Theo dõi Page View (Truy cập duy nhất)
+        sendAnalyticsEvent('PAGE_VIEW');
+        
+        // 2. Theo dõi Product Clicks
+        if (productsContainer) {
+            productsContainer.addEventListener('click', (e) => {
+                if (e.target.closest('.rounded-lg.shadow-md')) {
+                    sendAnalyticsEvent('CLICK_PRODUCT');
+                }
+            });
+        }
+        
+        // 3. Theo dõi Video Clicks
+        if (lecturesContainer) {
+             lecturesContainer.addEventListener('click', (e) => {
+                if (e.target.closest('.video-item')) {
+                    sendAnalyticsEvent('CLICK_VIDEO');
+                }
+            });
+        }
+
+        // 4. Theo dõi Donate Clicks (Gieo Duyên / Tùy Hỷ)
+        donateButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                sendAnalyticsEvent('CLICK_DONATE');
+            });
+        });
+        // ------------------------------------
+		
     </script>
 </body>
 </html>
