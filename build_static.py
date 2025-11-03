@@ -22,7 +22,7 @@ def load_data(url):
         print(f"[LỖI LOAD_DATA] Lỗi khi tải dữ liệu từ {url}: {e}")
         return []
 
-def process_data(products_raw, videos_raw):
+def process_data(products_raw, videos_raw, analytics_raw):
     """Xử lý dữ liệu thô (giống hệt code cũ của bạn)."""
     products_processed = []
     
