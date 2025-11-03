@@ -228,21 +228,23 @@
         <footer class="bg-phap-duyen-nau text-gray-200 p-6 text-center text-sm rounded-b-lg mt-6">
 		
 		
-			<div class="mb-6"> <div class="flex justify-around items-center max-w-xs mx-auto p-3 bg-black bg-opacity-25 rounded-lg shadow-inner">
+			<div class="mb-5 p-2 bg-black bg-opacity-25 rounded-full max-w-xs mx-auto">
+                
+                <div class="flex justify-around items-center text-xs">
                     
-                    <div class="flex flex-col items-center px-2 text-center">
-                        <i class="fas fa-users text-xl text-phap-duyen-vang"></i>
-                        <span class="mt-1 text-xs font-bold text-white">{{ stats.unique_visitors | default(0) }}</span>
+                    <div class="flex items-center space-x-1 text-white" title="Khách duy nhất">
+                        <i class="fas fa-users text-phap-duyen-vang"></i>
+                        <span class="font-bold">{{ stats.unique_visitors | default(0) }}</span>
                     </div>
                     
-                    <div class="flex flex-col items-center px-3 text-center border-l border-r border-gray-600">
-                        <i class="fas fa-shopping-cart text-xl text-phap-duyen-vang"></i>
-                        <span class="mt-1 text-xs font-bold text-white">{{ stats.click_product | default(0) }}</span>
+                    <div class="flex items-center space-x-1 text-white" title="Lượt xem sản phẩm">
+                        <i class="fas fa-shopping-cart text-phap-duyen-vang"></i>
+                        <span class="font-bold">{{ stats.click_product | default(0) }}</span>
                     </div>
 
-                    <div class="flex flex-col items-center px-2 text-center">
-                        <i class="fas fa-hand-holding-heart text-xl text-phap-duyen-vang"></i>
-                        <span class="mt-1 text-xs font-bold text-white">{{ stats.click_donate | default(0) }}</span>
+                    <div class="flex items-center space-x-1 text-white" title="Lượt click tùy hỷ">
+                        <i class="fas fa-hand-holding-heart text-phap-duyen-vang"></i>
+                        <span class="font-bold">{{ stats.click_donate | default(0) }}</span>
                     </div>
 
                 </div>
